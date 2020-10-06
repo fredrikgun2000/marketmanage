@@ -1,0 +1,30 @@
+*{
+	
+	font-family: Helvetica, Arial, sans-serif;
+}
+
+body{
+	background-color: #f4f4f4;
+	color: #526069;
+}
+
+.color1{
+	color: #247CF0;
+}
+
+.color2{
+	color: white; 
+}
+
+.bgcolor1{
+	background-color:  #247CF0;
+}
+
+
+.bgcolor2{
+	background-color:  white;
+}
+
+.shadow1{
+	box-shadow: 4px 3px 10px black;
+}
