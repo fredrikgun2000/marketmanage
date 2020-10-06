@@ -1,6 +1,5 @@
 //dinamis
 $(document).ready(function() {
-	alert('oke');
 	CekPosisi();
 	LoadPagination();
 	LoadKaryawan();
