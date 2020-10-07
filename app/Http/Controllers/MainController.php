@@ -184,7 +184,9 @@ class MainController extends Controller
     		'disc1'=>0,
     		'disc2'=>0,
             'discnominal'=>0,
+            'modaltotal'=>$data2['hargabeli'],
     		'subtotal'=>$data2['hargajual'],
+            'untung'=>$data2['hargajual']-$data2['hargabeli']
     	);
     	Cart::create($data);
     	}else{
@@ -635,6 +637,26 @@ class MainController extends Controller
         $data = $data->orderBy('id','DESC')->get();
         return view('Karyawan.absenload',['dataabsen'=>$data]);
     }
+
+     public function LaporanUntungLoad(Request $request)
+    {
+        $tanggal1=date($request['tanggal1']);
+        $tanggal2=date($request['tanggal2']);
+
+        $data=TransaksiBeli::query();
+        if (!empty($tanggal1 AND $tanggal2)) {
+              $data = $data->whereBetween('tanggal',[$tanggal1,$tanggal2]);
+        }
+        $data = $data->orderBy('id','DESC')->get();
+
+        $data2=TransaksiJual::query();
+        if (!empty($tanggal1 AND $tanggal2)) {
+              $data2 = $data2->whereBetween('tanggal',[$tanggal1,$tanggal2]);
+        }
+        $data2 = $data2->orderBy('id','DESC')->get();
+
+        return view('Laporan.untungload',['datauntungjual'=>$data,'datauntungbeli'=>$data2]);
+    }
     //eksekusi data2
     public function EditSupplier($id)
     {
@@ -738,6 +760,9 @@ class MainController extends Controller
 
     public function CartUpdate($id,$qty,$disc1,$disc2,$discnominal,$subtotal)
     {
+        $data=Stok::where('kode',$id)->first()['hargabeli'];
+        $data3=Stok::where('kode',$id)->first()['hargajual'];
+        $data2=($data3*$qty-$data*$qty);
         Cart::where(array(
             'kode'=>$id,
             'transaksi'=>''
@@ -747,9 +772,12 @@ class MainController extends Controller
                 'disc1'=>$disc1,
                 'disc2'=>$disc2,
                 'discnominal'=>$discnominal,
-                'subtotal'=>$subtotal
+                'modaltotal'=>$data*$qty,
+                'subtotal'=>$subtotal,
+                'untung'=>$data2
             )
         );
+
         return Response()->JSON('berhasil update');
     }
 

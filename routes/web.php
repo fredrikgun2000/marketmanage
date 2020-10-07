@@ -23,7 +23,6 @@ Route::get('/Pembelian','MainController@PembelianIndex');
 Route::get('/Pelunasan','MainController@PelunasanIndex');
 Route::get('/ShowBarang','MainController@ShowBarangIndex');
 Route::get('/ShowSupplier','MainController@ShowSupplierIndex');
-Route::get('/UntungTerakhir','MainController@UntungTerakhir');
 
 //post data
 Route::post('/LoginPost','MainController@LoginPost');
@@ -68,6 +67,7 @@ Route::get('/CartUpdate/{id}/{qty}/{disc1}/{disc2}/{discnominal}/{subtotal}','Ma
 Route::get('/CartBeliUpdate/{id}/{qty}/{disc1}/{disc2}/{discnominal}/{subtotal}','MainController@CartBeliUpdate');
 Route::get('/LaporanPenjualanLoad','MainController@LaporanPenjualanLoad');
 Route::get('/LaporanPembelianLoad','MainController@LaporanPembelianLoad');
+Route::get('/LaporanUntungLoad','MainController@LaporanUntungLoad');
 Route::get('/CollapseLaporanBeli/{id}','MainController@CollapseLaporanBeli');
 Route::get('/CollapseLaporanj/{id}','MainController@CollapseLaporanJual');
 Route::get('/detilpelunasanbayar/{id}','MainController@detilpelunasanbayar');

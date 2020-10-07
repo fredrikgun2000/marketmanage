@@ -13,6 +13,8 @@ $(document).ready(function() {
 	LaporanPembelianLoad();
 	$( '#tanggal1' ).datepicker({dateFormat: 'yy-mm-dd'}).val(); 
 	$('#tanggal2').datepicker({dateFormat: 'yy-mm-dd'}).val();
+	$( '#tanggal1un' ).datepicker({dateFormat: 'yy-mm-dd'}).val(); 
+	$('#tanggal2un').datepicker({dateFormat: 'yy-mm-dd'}).val();
 	$( '#tanggal1s' ).datepicker({dateFormat: 'yy-mm-dd'}).val(); 
 	$('#tanggal2s').datepicker({dateFormat: 'yy-mm-dd'}).val();
 	$( '#tanggal3' ).datepicker({dateFormat: 'yy-mm-dd'}).val(); 
@@ -29,6 +31,7 @@ $(document).ready(function() {
 	aDec:',',
 	aSep:'.'
 	});
+
 })
 //submit
 $(document).on('submit','#StokForm',function(e){
@@ -112,35 +115,47 @@ function LoadSubPagination() {
 		$('#subpenjualanf').hide();
 		$('#subhutangf').hide();
 		$('#tampilabsen').hide();
+		$('#tampiluntung').hide();
 		$('#tablelaporanhutang').remove();
 		$('#tablelaporanbpenjualan').remove();
 		$('#tablebsen').remove();
+		$('#tableuntung').remove();
+		$('#untunghapus').remove();
 		LaporanPembelianLoad();
 	}else if (SubPagination=='subpenjualan') {
 		$('#subpembelianf').hide();
 		$('#subhutangf').hide();
 		$('#tampilabsen').hide();
+		$('#tampiluntung').hide();
 		$('#tablelaporanbeli').remove();
 		$('#tablelaporanhutang').remove();
 		$('#tablebsen').remove();
+		$('#tableuntung').remove();
+		$('#untunghapus').remove();
 		LaporanPenjualanLoad()
 	}else if (SubPagination=='subhutang') {
 		$('#subpenjualanf').hide();
 		$('#subpembelianf').hide();
 		$('#tampilabsen').hide();
+		$('#tampiluntung').hide();
 		$('#tablelaporanbeli').remove();
 		$('#tablelaporanjual').remove();
 		$('#tablebsen').remove();
+		$('#tableuntung').remove();
+		$('#untunghapus').remove();
 		HutangLoad();
 	}else if (SubPagination=='subabsen') {
 		$('#tampiltambahstaff').hide();
 		$('#subpenjualanf').hide();
 		$('#subpembelianf').hide();
 		$('#subhutangf').hide();
+		$('#tampiluntung').hide();
 		$('#tablelaporanbeli').remove();
 		$('#tablelaporanhutang').remove();
 		$('#tablelaporanjual').remove();
 		$('#tablestaff').remove();
+		$('#tableuntung').remove();
+		$('#untunghapus').remove();
 
 		if ($('#pagination').val()=='Karyawan') {
 			AbsenLoad();
@@ -150,6 +165,18 @@ function LoadSubPagination() {
 ;	}else if (SubPagination=='substaffbaru') {
 		$('#tampilabsen').hide();
 		$('#tablebsen').remove();
+		$('#untunghapus').remove();
+
+	}else if (SubPagination=='subuntung') {
+		$('#tampiltambahstaff').hide();
+		$('#tampilabsen').hide();
+		$('#subpenjualanf').hide();
+		$('#subpembelianf').hide();
+		$('#subhutangf').hide();
+		$('#tablelaporanbeli').remove();
+		$('#tablelaporanhutang').remove();
+		$('#tablelaporanjual').remove();
+		$('#tablestaff').remove();
 
 	}
 }
@@ -626,6 +653,25 @@ function LaporanAbsensiLoad() {
 	}
 }
 
+function LaporanUntungLoad() {
+	if ($('#pagination').val()=='Laporan') {
+		var tanggal1=$( '#tanggal1un' ).datepicker({dateFormat: 'yy-mm-dd'}).val(); 
+		var tanggal2=$('#tanggal2un').datepicker({dateFormat: 'yy-mm-dd'}).val();
+		$.ajax({
+			url:'LaporanUntungLoad',
+			data:'tanggal1='+tanggal1+'&tanggal2='+tanggal2,
+			method:'GET',
+			success:function(data){
+				$('#LaporanUntungLoad').html(data);
+				grand1();
+				grand2();
+				grand3();
+			}
+		})
+	}
+}
+
+
 function Pelunasan() {
 	if ($('#pagination').val()=='Pelunasan') {
 		var kode=$('#kode').val();
@@ -845,24 +891,35 @@ $(document).on('keyup','#money',function(){
  		$('#subpenjualan').css({"border":"0"});
  		$('#subhutang').css({"border":"0"});
  		$('#subabsen').css({"border":"0"});
+ 		$('#subuntung').css({"border":"0"});
  	}else if (id=='subpenjualan') {
  		$('#subpenjualanf').show();
  		$(this).css({"border":"1px solid #28a785","padding":"2px"});
  		$('#subpembelian').css({"border":"0"});
  		$('#subhutang').css({"border":"0"});
  		$('#subabsen').css({"border":"0"});
+ 		$('#subuntung').css({"border":"0"});
  	}else if (id=='subhutang') {
  		$('#subhutangf').show();
  		$(this).css({"border":"1px solid #28a785","padding":"2px"});
  		$('#subpembelian').css({"border":"0"});
  		$('#subpenjualan').css({"border":"0"});
  		$('#subabsen').css({"border":"0"});
+ 		$('#subuntung').css({"border":"0"});
  	}else if (id=='subabsen') {
  		$('#tampilabsen').show();
  		$(this).css({"border":"1px solid #28a785","padding":"2px"});
  		$('#subpembelian').css({"border":"0"});
  		$('#subpenjualan').css({"border":"0"});
  		$('#subhutang').css({"border":"0"});
+ 		$('#subuntung').css({"border":"0"});
+ 	}else if (id=='subuntung') {
+ 		$('#tampiluntung').show();
+ 		$(this).css({"border":"1px solid #28a785","padding":"2px"});
+ 		$('#subpembelian').css({"border":"0"});
+ 		$('#subpenjualan').css({"border":"0"});
+ 		$('#subhutang').css({"border":"0"});
+ 		$('#subabsen').css({"border":"0"});
  	}
  	LoadSubPagination();
 	$('.rupiah').autoNumeric('init',{
@@ -909,6 +966,10 @@ $(document).on('keyup','#money',function(){
 
 $(document).on('click','#PostLaporanAbsen',function(){
  	LaporanAbsensiLoad();
+ })
+
+$(document).on('click','#PostLaporanUntung',function(){
+ 	LaporanUntungLoad();
  })
 
 $(document).on('click','#editbarang',function(){
@@ -1067,3 +1128,30 @@ $(document).on('click','.btndelete',function(){
 })
 
 
+function grand1() {
+	var s=0;
+	$('.grandjual').each(function(){
+		var a=$(this).val();
+		s +=parseInt(a);
+	});
+	$('#grandjual').val(s);
+	$('#grandjualt').html(uang(s));
+}
+
+function grand2() {
+	var s=0;
+	$('.grandbeli').each(function(){
+		var a=$(this).val();
+		s +=parseInt(a);
+	});
+	$('#grandbeli').val(s);
+	$('#grandbelit').html(uang(s));
+}
+
+function grand3(){
+	var a=parseInt($('#grandbeli').val());
+	var b=parseInt($('#grandjual').val());
+	var rumus=b-a;
+	$('#granduntungt').html(uang(rumus));
+
+}

@@ -22,7 +22,9 @@ class CreateCartTable extends Migration
             $table->string('disc1');
             $table->string('disc2');
             $table->string('discnominal');
+            $table->string('modaltotal');
             $table->string('subtotal');
+            $table->string('untung');
             $table->timestamps();
         });
     }

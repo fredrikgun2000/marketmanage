@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class CartBeli extends Model
 {
     protected $table='cartbeli';
-    protected $fillable=['transaksi','kode','qty','hargacartbeli','disc1','disc2','discnominal','subtotal'];
+    protected $fillable=['transaksi','kode','qty','hargacartbeli','disc1','disc2','discnominal','subtotal','untung'];
 }
 // $table->string('transaksi');
 // $table->string('kode');
