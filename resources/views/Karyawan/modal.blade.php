@@ -17,8 +17,8 @@
 					<div class="col-lg-12">
 						<div class="row">
 							<div class="col-lg-4">Posisi</div>
-							<div class="col-lg-8" id="posisi">
-								<select>
+							<div class="col-lg-8">
+								<select id="posisi2">
 									<option>Karyawan</option>
 									<option>Admin</option>
 								</select>

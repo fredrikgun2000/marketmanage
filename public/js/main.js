@@ -593,7 +593,8 @@ function EditUser() {
 		var id=$('#id').val();
 		var nama=$('#nama').val();
 		var sandi=$('#sandi').val();
-		var posisi=$('#posisi').val();
+		var posisi=$('#posisi2').val();
+		alert(posisi);
 		$.ajax({
 			url:'UserUpdate',
 			data:'id='+id+'&nama='+nama+'&sandi='+sandi+'&posisi='+posisi,
