@@ -11,7 +11,9 @@ Detail Transaksi
 		<td>disc %</td>
 		<td>disc %</td>
 		<td>discnominal</td>
+		<td>modaltotal</td>
 		<td>subtotal</td>
+		<td>untung</td>
 	</tr>
 	</thead>
 	
@@ -26,7 +28,9 @@ Detail Transaksi
 		<td>{{$d->disc1}}</td>
 		<td>{{$d->disc2}}</td>
 		<td class="rupiah">{{$d->discnominal}}</td>
+		<td class="rupiah">{{$d->modaltotal}}</td>
 		<td class="rupiah">{{$d->subtotal}}</td>
+		<td class="rupiah">{{$d->untung}}</td>
 	</tbody>
 	@endforeach
 </table>

@@ -12,6 +12,7 @@
 									<li class="d-inline mx-1 text-success laporan" id="subpenjualan">Penjualan</li>
 									<li class="d-inline mx-1 text-success laporan" id="subhutang">Hutang</li>
 									<li class="d-inline mx-1 text-success laporan" id="subabsen">Staff</li>
+									
 								</ul>
 						</div>
 					</div>
@@ -272,6 +273,40 @@
 	</div>
 	<div class="row">
 		<div class="col-lg-12" id="LaporanAbsenLoad">
+		</div>
+	</div>
+	</div>
+
+	<div id="tampiluntung" style="display: none;">
+	<div class="row bgcolor2 my-2">
+		<div class="col-lg-12">
+			<div class="row" >
+				 	<div class="col-lg-12 my-2">
+				 			<div class="row">
+				 				<div class="col-lg-6">
+						 			<div class="row">
+						 				<div class="col-lg-4">
+						 					<label>tanggal </label>
+						 				</div>
+						 				<div class="col-lg-8">
+						 					<input name="tanggal1" id="tanggal1un">
+						 					<input name="tanggal2" id="tanggal2un">
+						 				</div>
+						 			</div>
+				 				</div>
+				 			</div>
+						 <div class="row">
+						 	<div class="col-lg-12 text-right">
+						 		<button id="PostLaporanUntung" class="bgcolor1 btn text-light">Cari</button>
+						 	</div>
+						 </div>
+		
+				 	</div>
+				 </div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-12" id="LaporanUntungLoad">
 		</div>
 	</div>
 	</div>
