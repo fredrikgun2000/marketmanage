@@ -21,7 +21,9 @@ class CreateTransaksijualTable extends Migration
             $table->string('subtotalt');
             $table->string('disc1t');
             $table->string('discnominalt');
+            $table->string('modaltotalcart');
             $table->string('grandtotal');
+            $table->string('untungtotal');
             $table->string('metode');
             $table->timestamps();
         });

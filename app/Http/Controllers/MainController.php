@@ -244,6 +244,10 @@ class MainController extends Controller
         $tunai=$request['tunai'];
         $debit=$request['debit'];
         $money=$request['money'];
+
+        $datamodal=Cart::where('transaksi','')->sum('modaltotal');
+        $datauntung=Cart::where('transaksi','')->sum('untung');
+
         if ($penjual!='Pilih Penjual') {
               if ($tunai!=0) {
             $tunaihasil='tunai,';
@@ -275,7 +279,9 @@ class MainController extends Controller
             'subtotalt'=>$subtotalt,
             'disc1t'=>$disc1t,
             'discnominalt'=>$discnominalt,
+            'modaltotalcart'=>$datamodal,
             'grandtotal'=>$grandtotal,
+            'untungtotal'=>$datauntung,
             'metode'=>$tunaihasil.$debithasil.$moneyhasil
         );
         $k=0;

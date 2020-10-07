@@ -7,7 +7,9 @@
 		<td>subtotal</td>
 		<td>disc %</td>
 		<td>disc</td>
+		<td>Modal Total</td>
 		<td>grandtotal</td>
+		<td>Untung Total</td>
 		<td>metode</td>
 	</tr>
 	</thead>
@@ -20,7 +22,9 @@
 		<td class="rupiah">{{$d->subtotalt}}</td>
 		<td>{{$d->disc1t}}</td>
 		<td class="rupiah">{{$d->discnominalt}}</td>
+		<td class="rupiah">{{$d->modaltotalcart}}</td>
 		<td class="rupiah">{{$d->grandtotal}}</td>
+		<td class="rupiah">{{$d->untungtotal}}</td>
 		<td>{{$d->metode}}</td>
 	</tr>
 	@endforeach
