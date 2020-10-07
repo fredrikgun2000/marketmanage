@@ -36,6 +36,8 @@
 					</form>
 				</div>
 			</div>
+			    <div class="alert alert-danger" id="stokalert" style="display: none;">
+		      </div>
 			<div class="row bgcolor2 my-2 py-2">
 				<div class="col-lg-12">
 						<form method="POST" id="StokForm">

@@ -47,8 +47,10 @@ $(document).on('submit','#StokForm',function(e){
 		success:function(data){
 			LoadStock();
 			$('.kosong').val('');
-		},error:function(data){
-			
+			$('#stokalert').html(data.err).show();
+			if (data.err==null) {
+				$('#stokalert').hide();
+			}
 		}
 	})
 })
@@ -621,7 +623,6 @@ function EditUser() {
 		var nama=$('#nama').val();
 		var sandi=$('#sandi').val();
 		var posisi=$('#posisi2').val();
-		alert(posisi);
 		$.ajax({
 			url:'UserUpdate',
 			data:'id='+id+'&nama='+nama+'&sandi='+sandi+'&posisi='+posisi,
