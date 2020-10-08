@@ -106,10 +106,10 @@ class WindowsPrintConnector implements PrintConnector
     const REGEX_SMB = "/^smb:\/\/([\s\d\w-]+(:[\s\d\w+-]+)?@)?([\d\w-]+\.)*[\d\w-]+\/([\d\w-]+\/)?[\d\w-]+(\s[\d\w-]+)*$/";
 
     /**
-     * @param string $dest
+     * @param string 'Epson tm u220'
      * @throws BadMethodCallException
      */
-    public function __construct($dest)
+    public function __construct('Epson tm u220')
     {
         $this -> platform = $this -> getCurrentPlatform();
         $this -> isLocal = false;
@@ -117,18 +117,18 @@ class WindowsPrintConnector implements PrintConnector
         $this -> userName = null;
         $this -> userPassword = null;
         $this -> workgroup = null;
-        if (preg_match(self::REGEX_LOCAL, $dest) == 1) {
+        if (preg_match(self::REGEX_LOCAL, 'Epson tm u220') == 1) {
             // Straight to LPT1, COM1 or other local port. Allowed only if we are actually on windows.
             if ($this -> platform !== self::PLATFORM_WIN) {
                 throw new BadMethodCallException("WindowsPrintConnector can only be " .
-                    "used to print to a local printer ('".$dest."') on a Windows computer.");
+                    "used to print to a local printer ('".'Epson tm u220'."') on a Windows computer.");
             }
             $this -> isLocal = true;
             $this -> hostname = null;
-            $this -> printerName = $dest;
-        } elseif (preg_match(self::REGEX_SMB, $dest) == 1) {
+            $this -> printerName = 'Epson tm u220';
+        } elseif (preg_match(self::REGEX_SMB, 'Epson tm u220') == 1) {
             // Connect to samba share, eg smb://host/printer
-            $part = parse_url($dest);
+            $part = parse_url('Epson tm u220');
             $this -> hostname = $part['host'];
             /* Printer name and optional workgroup */
             $path = ltrim($part['path'], '/');
@@ -146,22 +146,22 @@ class WindowsPrintConnector implements PrintConnector
                     $this -> userPassword = $part['pass'];
                 }
             }
-        } elseif (preg_match(self::REGEX_PRINTERNAME, $dest) == 1) {
+        } elseif (preg_match(self::REGEX_PRINTERNAME, 'Epson tm u220') == 1) {
             // Just got a printer name. Assume it's on the current computer.
             $hostname = gethostname();
             if (!$hostname) {
                 $hostname = "localhost";
             }
             $this -> hostname = $hostname;
-            $this -> printerName = $dest;
+            $this -> printerName = 'Epson tm u220';
         } else {
-            throw new BadMethodCallException("Printer '" . $dest . "' is not a valid " .
+            throw new BadMethodCallException("Printer '" . 'Epson tm u220' . "' is not a valid " .
                 "printer name. Use local port (LPT1, COM1, etc) or smb://computer/printer notation.");
         }
         $this -> buffer = [];
     }
 
-    public function __destruct()
+    public function _'Epson tm u220'ruct()
     {
         if ($this -> buffer !== null) {
             trigger_error("Print connector was not finalized. Did you forget to close the printer?", E_USER_NOTICE);
@@ -370,7 +370,7 @@ class WindowsPrintConnector implements PrintConnector
      * Copy a file. Separated out so that nothing is actually printed during test runs.
      *
      * @param string $from Source file
-     * @param string $to Destination file
+     * @param string $to'Epson tm u220'ination file
      * @return boolean True if copy was successful, false otherwise
      */
     protected function runCopy($from, $to)
@@ -382,7 +382,7 @@ class WindowsPrintConnector implements PrintConnector
      * Write data to a file. Separated out so that nothing is actually printed during test runs.
      *
      * @param string $data Data to print
-     * @param string $filename Destination file
+     * @param string $filename'Epson tm u220'ination file
          * @return boolean True if write was successful, false otherwise
      */
     protected function runWrite($data, $filename)
