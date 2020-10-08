@@ -284,6 +284,7 @@ class MainController extends Controller
             'untungtotal'=>$datauntung,
             'metode'=>$tunaihasil.$debithasil.$moneyhasil
         );
+        $this->Print($tanggalpost,$subtotalt,$disc1t,$discnominalt);
         $k=0;
         while($k<count($qty)){
             Stok::where('kode',$kode[$k])->decrement('stok', $qty[$k]);
@@ -918,76 +919,55 @@ class MainController extends Controller
         return $data;
     }
 
-    // public function test()
-    // {
-    //     // Set params
-    //     $mid = '123123456';
-    //     $store_name = 'YOURMART';
-    //     $store_address = 'Mart Address';
-    //     $store_phone = '1234567890';
-    //     $store_email = 'yourmart@email.com';
-    //     $store_website = 'yourmart.com';
-    //     $tax_percentage = 10;
-    //     $transaction_id = 'TX123ABC456';
+    public function Print($tanggalpost,$subtotalt,$disc1t,$discnominalt)
+    {
+        // Set params
+        $store_name='';
+        $store_address='';
+        $store_phone='';
+        $tax_percentage = 0;
+        $notransaksi=TransaksiJual::all()->count()+1;
+        
+        // Set items
+        $items =DB::table('stok')
+            ->select('*')
+            ->join('cart', 'stok.kode', '=', 'cart.kode')
+            ->where(array(
+                'cart.transaksi'=>'',
+            ))->get();
 
-    //     // Set items
-    //     $items = [
-    //         [
-    //             'name' => 'French Fries (tera)',
-    //             'qty' => 2,
-    //             'price' => 65000,
-    //         ],
-    //         [
-    //             'name' => 'Roasted Milk Tea (large)',
-    //             'qty' => 1,
-    //             'price' => 24000,
-    //         ],
-    //         [
-    //             'name' => 'Honey Lime (large)',
-    //             'qty' => 3,
-    //             'price' => 10000,
-    //         ],
-    //         [
-    //             'name' => 'Jasmine Tea (grande)',
-    //             'qty' => 3,
-    //             'price' => 8000,
-    //         ],
-    //     ];
+        // Init printer
+        $printer = new ReceiptPrinter;
+        $printer->init(
+            config('receiptprinter.connector_type'),
+            config('receiptprinter.connector_descriptor')
+        );
 
-    //     // Init printer
-    //     $printer = new ReceiptPrinter;
-    //     $printer->init(
-    //         config('receiptprinter.connector_type'),
-    //         config('receiptprinter.connector_descriptor')
-    //     );
+        // Set store info
+        $printer->setStore($store_name, $store_address,$notransaksi, $store_phone);
 
-    //     // Set store info
-    //     $printer->setStore($mid, $store_name, $store_address, $store_phone, $store_email, $store_website);
+        // Add items
+        foreach ($items as $item) {
+            $printer->addItem(
+                $item->nama,
+                $item->qty,
+                $item->hargacart,
+                $item->disc1,
+                $item->disc2,
+                $item->discnominal,
+                $item->subtotal
+            );
+        }
+        
+        // Calculate total
+        $printer->calculateSubTotal($subtotalt);
+        $printer->calculateGrandTotal($disc1t,$discnominalt);
+      
+        // Set transaction ID
 
-    //     // Add items
-    //     foreach ($items as $item) {
-    //         $printer->addItem(
-    //             $item['name'],
-    //             $item['qty'],
-    //             $item['price']
-    //         );
-    //     }
-    //     // Set tax
-    //     $printer->setTax($tax_percentage);
+        $printer->setTransactionID($notransaksi);
 
-    //     // Calculate total
-    //     $printer->calculateSubTotal();
-    //     $printer->calculateGrandTotal();
-
-    //     // Set transaction ID
-    //     $printer->setTransactionID($transaction_id);
-
-    //     // Set qr code
-    //     $printer->setQRcode([
-    //         'tid' => $transaction_id,
-    //     ]);
-
-    //     // Print receipt
-    //     $printer->printReceipt();
-    // }
+        // Print receipt
+        $printer->printReceipt();
+    }
 }

@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/test','MainController@test');
+Route::get('/test','MainController@Print');
 //tampilan
 Route::get('/','MainController@LoginIndex');
 Route::get('/Laporan','MainController@LaporanIndex');
