@@ -769,7 +769,7 @@ function HutangLoad() {
  	})
  })
 
- $(document).on('keyup','.qtyc',function(){
+ $(document).on('change','.qtyc',function(){
  	var id=$(this).attr('id');
  	if ($('#pagination').val()=='Scanning') {
 	 		$.ajax({
