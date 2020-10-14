@@ -1156,3 +1156,45 @@ function grand3(){
 	$('#granduntungt').html(uang(rumus));
 
 }
+
+$(document).on('focus','input', function(){
+	var input=$(this);
+	$(document).on('click','.keypad',function(){
+		var keypad=$(this).attr('id');
+		var isi=input.val()
+		input.val(isi+keypad);
+	})
+});
+
+$(document).on('keypress',function(e) {
+    if (e.keyCode==47) {
+    	var kode=$('#kode2').val();
+		var pagination=$('#pagination').val();
+		if (pagination=='Scanning') {
+			if (kode!='') {
+			$.ajax({
+				url:'/CartPost/'+kode,
+				method:'GET',
+				success:function(data){
+					LoadCart();
+			 		$('#kodex').val('');
+			 		$('#kode2').val('');
+				}
+			})
+		 }
+		}else{
+			if (kode!='') {
+			$.ajax({
+				url:'/CartBeliPost/'+kode,
+				method:'GET',
+				success:function(data){
+					LoadCart();
+			 		$('#kodex').val('');
+			 		$('#kode2').val('');
+				}
+			})
+		}
+		}
+
+	}
+});

@@ -97,7 +97,7 @@ table{
       </h1>
       </div>
     </div>
-    <div class="row">
+    <div class="row" style="min-height: 550px;">
       <div class="col-lg-12">
         @yield('laporan')
         @yield('karyawan')
@@ -107,6 +107,53 @@ table{
         @yield('pelunasan')
       </div>
     </div>
+    <div class="row">
+    <div class="col-lg-12">
+      <footer class="text-center">
+        <p style="opacity: 0.2;">FredrikGunawan @ 2020</p>
+      </footer>
+    </div>
+  </div>
+</div>
+
+
+<!-- <div class="panel-group" style="position: fixed;bottom: 0px;">
+            <div class="panel panel-default">
+                
+                <div id="collapse1" class="panel-collapse collapse px-2 py-2 bgcolor2" style="border-radius: 10px 10px 0px 0px; border: 1px solid black;">
+                    <div class="row">
+                      <div class="col-lg-12 text-center">
+                        <div class="row d-flex justify-content-center my-2">
+                          <button type="button" class="keypad col-3 mx-1" style="border: 1px solid black; padding: 10px 0px; border-radius: 10px;" id="1">1</button>
+                          <button type="button" class="keypad col-3 mx-1" style="border: 1px solid black; padding: 10px 0px; border-radius: 10px;" id="2">2</button>
+                          <button type="button" class="keypad col-3 mx-1" style="border: 1px solid black; padding: 10px 0px; border-radius: 10px;" id="3">3</button>
+                      </div>
+                      <div class="row d-flex justify-content-center my-2">
+                          <button type="button" class="keypad col-3 mx-1" style="border: 1px solid black; padding: 10px 0px; border-radius: 10px;" id="4">4</button>
+                          <button type="button" class="keypad col-3 mx-1" style="border: 1px solid black; padding: 10px 0px; border-radius: 10px;" id="5">5</button>
+                          <button type="button" class="keypad col-3 mx-1" style="border: 1px solid black; padding: 10px 0px; border-radius: 10px;" id="6">6</button>
+                      </div>
+                      <div class="row d-flex justify-content-center my-2">
+                          <button type="button" class="keypad col-3 mx-1" style="border: 1px solid black; padding: 10px 0px; border-radius: 10px;" id="7">7</button>
+                          <button type="button" class="keypad col-3 mx-1" style="border: 1px solid black; padding: 10px 0px; border-radius: 10px;" id="8">8</button>
+                          <button type="button" class="keypad col-3 mx-1" style="border: 1px solid black; padding: 10px 0px; border-radius: 10px;" id="9">9</button>
+                      </div>
+                      <div class="row d-flex justify-content-center my-2">
+                          <button type="button" class="keypad col-3 mx-1" style="border: 1px solid black; padding: 10px 0px; border-radius: 10px;" id="0">0</button>
+                          <button type="button" class="keypad col-3 mx-1" style="border: 1px solid black; padding: 10px 0px; border-radius: 10px;" id="00">00</button>
+                          <button type="button" class="keypad col-3 mx-1" style="border: 1px solid black; padding: 10px 0px; border-radius: 10px;" id="000">000</button>
+                      </div>
+                      </div>
+                    </div>
+                </div>
+
+<div class="panel-heading bgcolor1" style="padding: 5px 100px;" href="#collapse1" data-toggle="collapse">
+                    <h6 class="panel-title text-light">
+                       KeyPad
+                    </h6>
+                </div>
+            </div>
+        </div> -->
 </div>
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
