@@ -1001,6 +1001,7 @@ $(document).on('keyup','.search',function(){
 			}else if (sub=='substaffbaru') {
 				$('#KaryawanLoad').html(data);
 			}
+			CekPosisi();
 		}
 	})
 })
