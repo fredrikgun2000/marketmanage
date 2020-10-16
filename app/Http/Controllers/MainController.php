@@ -922,9 +922,9 @@ class MainController extends Controller
     public function Print($tanggalpost,$subtotalt,$disc1t,$discnominalt)
     {
         // Set params
-        $store_name='';
-        $store_address='';
-        $store_phone='';
+        $store_name='Dunia Kita';
+        $store_address='Jln transkalimantan ruko mitra keluarga';
+        $store_phone='x';
         $tax_percentage = 0;
         $notransaksi=TransaksiJual::all()->count()+1;
         
