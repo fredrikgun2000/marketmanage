@@ -925,7 +925,7 @@ class MainController extends Controller
         $store_name='Dunia Kita';
         $store_address='Jln transkalimantan ruko mitra keluarga';
         $store_phone='x';
-        $tax_percentage = $subtotal*($disc1t/100)+$discnominalt;
+        $tax_percentage = $subtotalt*($disc1t/100)+$discnominalt;
         $notransaksi=TransaksiJual::all()->count()+1;
         
         // Set items
