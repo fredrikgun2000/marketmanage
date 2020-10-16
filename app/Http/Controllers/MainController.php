@@ -961,6 +961,7 @@ class MainController extends Controller
         
         // Calculate total
         $printer->calculateSubTotal($subtotalt);
+        $printer->setTax($tax_percentage);
         $printer->calculateGrandTotal($disc1t,$discnominalt);
       
         // Set transaction ID
