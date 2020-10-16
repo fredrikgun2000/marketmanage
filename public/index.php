@@ -7,18 +7,18 @@
  * @author   Taylor Otwell <taylor@laravel.com>
  */
 
-// function tes()
-// {
-// 	ob_start();
-// 	system('ipconfig/all');
-// 	$a=ob_get_contents();
-// 	ob_clean();
-// 	$b='Physical';
-// 	$c=strpos($a,$b);
-// 	$d=substr($a, ($c+36),17);
-// 	if ($d!='B4-2E-99-DE-69-E9') {
-// 		echo "This Error Page// You Don't Have Access !!!";
-// 	}elseif ($d=='B4-2E-99-DE-69-E9') {
+function tes()
+{
+	ob_start();
+	system('ipconfig/all');
+	$a=ob_get_contents();
+	ob_clean();
+	$b='Physical';
+	$c=strpos($a,$b);
+	$d=substr($a, ($c+36),17);
+	if ($d!='B4-2E-99-DE-69-E9') {
+		echo "This Error Page// You Don't Have Access !!!";
+	}elseif ($d=='B4-2E-99-DE-69-E9') {
 		
 define('LARAVEL_START', microtime(true));
 /*
@@ -35,7 +35,7 @@ define('LARAVEL_START', microtime(true));
 
 require __DIR__.'/../vendor/autoload.php';
 
-/*
+
 |--------------------------------------------------------------------------
 | Turn On The Lights
 |--------------------------------------------------------------------------
@@ -45,7 +45,7 @@ require __DIR__.'/../vendor/autoload.php';
 | will load up this application so that we can run it and send
 | the responses back to the browser and delight our users.
 |
-*/
+
 
 $app = require_once __DIR__.'/../bootstrap/app.php';
 $app->bind('path.public',function(){
@@ -74,6 +74,6 @@ $response->send();
 
 $kernel->terminate($request, $response);
 
-// 	}
-// }
-// tes();
+	}
+}
+tes();
