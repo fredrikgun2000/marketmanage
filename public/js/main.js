@@ -819,6 +819,56 @@ function HutangLoad() {
 
  })
 
+ $(document).on('keyup','.qtyc',function(){
+ 	var id=$(this).attr('id');
+ 	if ($('#pagination').val()=='Scanning') {
+	 		$.ajax({
+	 		url:'/ShowStok/'+id,
+	 		method:'GET',
+	 		success:function(data){
+	 			$('.qty'+id).attr('max',data);
+				var cekqty=parseInt($('.qty'+id).val());
+	 			if (data<parseInt(cekqty)) {
+	 				alert('stok hanya :'+data);
+	 				$('.qty'+id).val(data);
+	 			}else{
+	 				$('.qty'+id).val(cekqty);
+
+	 			}
+				 	var qty=$('.qty'+id).val();
+				 	var hargacart=$('#hargacart'+id).val();
+				 	var disc1=$('.disc1k'+id).val();
+				 	var disc2=$('.disc2k'+id).val();
+				 	var discnominal=$('.discnominal'+id).val();
+				 	hitung(id,qty,hargacart,disc1,disc2,discnominal);
+				 	var subtotal=$('#subtotal'+id).val();
+					CartUpdate(id,qty,disc1,disc2,discnominal,subtotal);
+					$('.rupiah').autoNumeric('init',{
+
+				aDec:',',
+				aSep:'.'
+					});
+	 		}
+	 	})
+ 	}else if ($('#pagination').val()=='Pembelian') {
+			 		var qty=$('.qty'+id).val();
+				 	var hargacart=$('#hargacart'+id).val();
+				 	var disc1=$('.disc1k'+id).val();
+				 	var disc2=$('.disc2k'+id).val();
+				 	var discnominal=$('.discnominal'+id).val();
+				 	hitung(id,qty,hargacart,disc1,disc2,discnominal);
+				 	var subtotal=$('#subtotal'+id).val();
+					CartUpdate(id,qty,disc1,disc2,discnominal,subtotal);
+					$('.rupiah').autoNumeric('init',{
+
+				aDec:',',
+				aSep:'.'
+					});
+
+ 	}
+
+ })
+
  $(document).on('keyup','.d1c',function(){
  	var id=$(this).attr('id');
  	var qty=parseInt($('.qty'+id).val());
@@ -1158,19 +1208,19 @@ function grand3(){
 
 }
 
-$(document).on('focus','input', function(){
-	var input=$(this);
-	$(document).on('click','.keypad',function(){
-		var keypad=$(this).attr('id');
-		var isi=input.val()
-		input.val(isi+keypad);
-	})
-});
+// $(document).on('focus','input', function(){
+// 	var input=$(this);
+// 	$(document).on('click','.keypad',function(){
+// 		var keypad=$(this).attr('id');
+// 		var isi=input.val()
+// 		input.val(isi+keypad);
+// 	})
+// });
 
 $(document).on('keypress',function(e) {
-    if (e.keyCode==47) {
     	var kode=$('#kode2').val();
 		var pagination=$('#pagination').val();
+    if (e.keyCode==47) {
 		if (pagination=='Scanning') {
 			if (kode!='') {
 			$.ajax({
@@ -1196,6 +1246,5 @@ $(document).on('keypress',function(e) {
 			})
 		}
 		}
-
 	}
 });

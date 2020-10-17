@@ -202,33 +202,13 @@ class MainController extends Controller
     	}
     }
 
- public function CartBeliPost($kode)
-    {
-        $data2=Stok::where('kode',$kode)->first();
-        $data3=CartBeli::where(
-            array(
-                'kode'=>$kode,
-                'transaksi'=>'',
-            )
-        )->first();
-        if ($data3=='') { 
-            if ($data2!='') {
-            $data=array(
-            'transaksi'=>'',
-            'kode'=>$kode,
-            'qty'=>1,
-            'hargacartbeli'=>$data2['hargabeli'],
-            'disc1'=>0,
-            'disc2'=>0,
-            'discnominal'=>0,
-            'subtotal'=>$data2['hargabeli'],
-        );
-        CartBeli::create($data);
-        }else{
-            return Response()->JSON('kode salah');
-        }
-        }
-    }
+ public function CartBeliPost($kode) {
+ $data2=Stok::where('kode',$kode)->first(); $data3=CartBeli::where( array(
+ 'kode'=>$kode, 'transaksi'=>'', ) )->first(); if ($data3=='') {  if
+ ($data2!='') { $data=array( 'transaksi'=>'', 'kode'=>$kode, 'qty'=>1,
+ 'hargacartbeli'=>$data2['hargabeli'], 'disc1'=>0, 'disc2'=>0,
+ 'discnominal'=>0, 'subtotal'=>$data2['hargabeli'], );
+ CartBeli::create($data); }else{ return Response()->JSON('kode salah'); } } }
 
     public function PenjualanPost(Request $request)
     {  
@@ -246,7 +226,7 @@ class MainController extends Controller
         $money=$request['money'];
 
         $datamodal=Cart::where('transaksi','')->sum('modaltotal');
-        $datauntung=Cart::where('transaksi','')->sum('untung');
+        $datauntung=$grandtotal-$datamodal;
 
         if ($penjual!='Pilih Penjual') {
               if ($tunai!=0) {
@@ -776,7 +756,7 @@ class MainController extends Controller
     {
         $data=Stok::where('kode',$id)->first()['hargabeli'];
         $data3=Stok::where('kode',$id)->first()['hargajual'];
-        $data2=($data3*$qty-$data*$qty);
+        $data2=($subtotal-$data);
         Cart::where(array(
             'kode'=>$id,
             'transaksi'=>''
