@@ -272,6 +272,7 @@ function LoadCart2(kode) {
 			aSep:'.'
 				});
 				subtotal1();
+				$('.qty'+kode).val('');
 				$('.qty'+kode).focus();
 			}
 		})
@@ -470,6 +471,14 @@ function hitung2() {
 	var d2=parseInt($('#discnominal2').val());
 	$('#disc3k').val(d1);
 	$('#discnominal2').val(d2);
+	if (isNaN(d1)) {
+		$('#disc3k').val('0');
+		d1=0;
+	}
+	if (isNaN(d2)) {
+		$('#discnominal2').val('0');
+		d2=0;
+	}
 	var rumus1=subtotal-subtotal*(d1/100);
 	var rumus2=rumus1-d2;
 	$('#grandtotal2').html(uang(rumus2));
@@ -490,6 +499,18 @@ function hitung3() {
 	$('#tunai').val(tunai);
 	$('#debit').val(debit);
 	$('#money').val(money);
+	if (isNaN(tunai)) {
+		$('#tunai').val('0');
+		tunai=0;
+	}
+	if (isNaN(debit)) {
+		$('#debit').val('0');
+		debit=0;
+	}
+	if (isNaN(money)) {
+		$('#money').val('0');
+		money=0;
+	}
 	var grandtotal=parseInt($('#grandtotal').val());
 	var rumus1=(tunai+debit+money)-grandtotal;
 	var kembalian=$('#kembalian').html(rumus1);
@@ -820,6 +841,10 @@ function HutangLoad() {
 
 	 			}
 				 	var qty=$('.qty'+id).val();
+				 	if (qty=='') {
+				 		$('.qty'+id).val('1');
+				 		qty=1;
+				 	}
 				 	var hargacart=$('#hargacart'+id).val();
 				 	var disc1=$('.disc1k'+id).val();
 				 	var disc2=$('.disc2k'+id).val();
@@ -836,6 +861,10 @@ function HutangLoad() {
 	 	})
  	}else if ($('#pagination').val()=='Pembelian') {
 			 		var qty=$('.qty'+id).val();
+			 		if (qty=='') {
+				 		$('.qty'+id).val('1');
+				 		qty=1;
+				 	}
 				 	var hargacart=$('#hargacart'+id).val();
 				 	var disc1=$('.disc1k'+id).val();
 				 	var disc2=$('.disc2k'+id).val();
@@ -850,7 +879,6 @@ function HutangLoad() {
 					});
 
  	}
-
  })
 
  $(document).on('keyup','.qtyc',function(){
@@ -870,6 +898,7 @@ function HutangLoad() {
 
 	 			}
 				 	var qty=$('.qty'+id).val();
+				 	$('.qty'+id).val(qty);
 				 	var hargacart=$('#hargacart'+id).val();
 				 	var disc1=$('.disc1k'+id).val();
 				 	var disc2=$('.disc2k'+id).val();
@@ -908,6 +937,11 @@ function HutangLoad() {
  	var qty=parseInt($('.qty'+id).val());
  	var hargacart=parseInt($('#hargacart'+id).val());
  	var disc1=parseInt($('.disc1k'+id).val());
+ 	$('.disc1k'+id).val(disc1);
+ 	if (isNaN(disc1)) {
+ 		$('.disc1k'+id).val('0');
+ 		disc1=0;
+ 	}
  	var disc2=parseInt($('.disc2k'+id).val());
  	var discnominal=parseInt($('.discnominal'+id).val());
  	hitung(id,qty,hargacart,disc1,disc2,discnominal);
@@ -922,6 +956,11 @@ function HutangLoad() {
  	var hargacart=parseInt($('#hargacart'+id).val());
  	var disc1=parseInt($('.disc1k'+id).val());
  	var disc2=parseInt($('.disc2k'+id).val());
+ 	$('.disc2k'+id).val(disc2);
+ 	if (isNaN(disc2)) {
+ 		$('.disc2k'+id).val('0');
+ 		disc2=0;
+ 	}
  	var discnominal=parseInt($('.discnominal'+id).val());
  	hitung(id,qty,hargacart,disc1,disc2,discnominal);
  	var subtotal=parseInt($('#subtotal'+id).val());
@@ -936,6 +975,53 @@ function HutangLoad() {
  	var disc1=parseInt($('.disc1k'+id).val());
  	var disc2=parseInt($('.disc2k'+id).val());
  	var discnominal=parseInt($('.discnominal'+id).val());
+ 	$('.discnominal'+id).val(discnominal);
+ 	if (isNaN(discnominal)) {
+ 		$('.discnominal'+id).val('0');
+ 		discnominal=0;
+ 	}
+ 	hitung(id,qty,hargacart,disc1,disc2,discnominal);
+ 	var subtotal=parseInt($('#subtotal'+id).val());
+	CartUpdate(id,qty,disc1,disc2,discnominal,subtotal);
+	
+ })
+
+ $(document).on('change','.d1c',function(){
+ 	var id=$(this).attr('id');
+ 	var qty=parseInt($('.qty'+id).val());
+ 	var hargacart=parseInt($('#hargacart'+id).val());
+ 	var disc1=parseInt($('.disc1k'+id).val());
+ 	$('.disc1k'+id).val(disc1);
+ 	var disc2=parseInt($('.disc2k'+id).val());
+ 	var discnominal=parseInt($('.discnominal'+id).val());
+ 	hitung(id,qty,hargacart,disc1,disc2,discnominal);
+ 	var subtotal=parseInt($('#subtotal'+id).val());
+	CartUpdate(id,qty,disc1,disc2,discnominal,subtotal);
+	
+ })
+
+ $(document).on('change','.d2c',function(){
+ 	var id=$(this).attr('id');
+ 	var qty=parseInt($('.qty'+id).val());
+ 	var hargacart=parseInt($('#hargacart'+id).val());
+ 	var disc1=parseInt($('.disc1k'+id).val());
+ 	var disc2=parseInt($('.disc2k'+id).val());
+ 	$('.disc2k'+id).val(disc2);
+ 	var discnominal=parseInt($('.discnominal'+id).val());
+ 	hitung(id,qty,hargacart,disc1,disc2,discnominal);
+ 	var subtotal=parseInt($('#subtotal'+id).val());
+	CartUpdate(id,qty,disc1,disc2,discnominal,subtotal);
+	
+ })
+
+ $(document).on('change','.dnc',function(){
+ 	var id=$(this).attr('id');
+ 	var qty=parseInt($('.qty'+id).val());
+ 	var hargacart=parseInt($('#hargacart'+id).val());
+ 	var disc1=parseInt($('.disc1k'+id).val());
+ 	var disc2=parseInt($('.disc2k'+id).val());
+ 	var discnominal=parseInt($('.discnominal'+id).val());
+ 	$('.discnominal'+id).val(discnominal);
  	hitung(id,qty,hargacart,disc1,disc2,discnominal);
  	var subtotal=parseInt($('#subtotal'+id).val());
 	CartUpdate(id,qty,disc1,disc2,discnominal,subtotal);
