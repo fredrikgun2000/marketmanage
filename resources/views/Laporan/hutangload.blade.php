@@ -20,6 +20,8 @@
 		<td>{{$d->tempo}}</td>
 		<td>{{$d->supplier}}</td>
 		<td class="rupiah">{{$d->grandtotal}}</td>
+		<input type="hidden" class="hutanglap" value="{{$d->grandtotal}}">
+		<input type="hidden" class="pelunasanlap" value="{{$d->pelunasan}}">
 		<td class="rupiah">{{$d->pelunasan}}</td>
 		<td><button class="btn btn-warning detilpelunasanbayar" id="{{$d->notransaksi}}" data-toggle="modal" data-target="#detilpelunasanbayarh">Detail</button></td>
 	</tr>

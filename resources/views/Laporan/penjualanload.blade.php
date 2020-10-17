@@ -25,6 +25,7 @@
 		<td class="rupiah">{{$d->modaltotalcart}}</td>
 		<td class="rupiah">{{$d->grandtotal}}</td>
 		<td class="rupiah">{{$d->untungtotal}}</td>
+		<input type="hidden" class="untungtotallap" value="{{$d->untungtotal}}">
 		<td>{{$d->metode}}</td>
 	</tr>
 	@endforeach

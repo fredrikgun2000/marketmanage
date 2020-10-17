@@ -137,6 +137,9 @@
 					 </div>
 					 <div>
 					 	<div class="row text-right my-2">
+					 	<div class="col-lg-12">Total Untung :<b class="mx-3 rupiah" id="totaluntungx"></b></div>
+					 </div>
+					 	<div class="row text-right my-2">
 					 	<div class="col-lg-12">Total Penjualan :<b class="mx-3" id="subtotaljualb"></b></div>
 					 </div>
 					 </div>
@@ -209,6 +212,9 @@
 					 </div>
 					 <div class="row">
 					 	<div id="HutangLoad" class="col-lg-12"></div>
+					 </div>
+					 <div class="row text-right my-2">
+					 	<div class="col-lg-12">Total Hutang :<b class="mx-3 rupiah" id="totalhutang"></b></div>
 					 </div>
 					 </div>
 

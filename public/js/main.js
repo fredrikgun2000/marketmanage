@@ -516,6 +516,31 @@ function hitung3() {
 	var kembalian=$('#kembalian').html(rumus1);
 }
 
+function hutanglap() {
+	var s=0;
+	$('.hutanglap').each(function(){
+		var a=$(this).val();
+		s +=parseInt(a);
+	});
+
+	var d=0;
+	$('.pelunasanlap').each(function(){
+		var b=$(this).val();
+		d +=parseInt(b);
+	});
+	var rumus=parseInt(s)-parseInt(d);
+	$('#totalhutang').html(uang(rumus));
+}
+
+function untunglap() {
+	var s=0;
+	$('.untungtotallap').each(function(){
+		var a=$(this).val();
+		s +=parseInt(a);
+	});
+	$('#totaluntungx').html(uang(s));
+}
+
 function subtotal1() {
 	var s=0;
 	$('.subtotal1').each(function(){
@@ -624,11 +649,13 @@ function LaporanPenjualanLoad() {
 			success:function(data){
 				$('#LaporanPenjualanLoad').html(data);
 				DeleteId();
+				untunglap();
 				$('.rupiah').autoNumeric('init',{
 
 			aDec:',',
 			aSep:'.'
 				});
+
 			}
 		})
 	}
@@ -775,6 +802,7 @@ function HutangLoad() {
 	aDec:',',
 	aSep:'.'
 	});
+	hutanglap();
 			}
 		})
 	}
