@@ -259,6 +259,40 @@ function LoadCart() {
 		}
 }
 
+function LoadCart2(kode) {
+	if ($('#pagination').val()=='Scanning') {
+			$.ajax({
+			url:'CartLoad/',
+			method:'GET',
+			success:function(data){
+				$('#CartLoad').html(data);
+				$('.rupiah').autoNumeric('init',{
+
+			aDec:',',
+			aSep:'.'
+				});
+				subtotal1();
+				$('.qty'+kode).focus();
+			}
+		})
+		}else if ($('#pagination').val()=='Pembelian') {
+			$.ajax({
+			url:'CartBeliLoad/',
+			method:'GET',
+			success:function(data){
+				$('#CartLoad').html(data);
+				$('.rupiah').autoNumeric('init',{
+
+			aDec:',',
+			aSep:'.'
+				});
+				subtotal1();
+				$('.qty'+kode).focus();
+			}
+		})
+		}
+}
+
 function LoadSupplier() {
 	if ($('#SubPagination').val()=='subsupplier') {
 		$.ajax({
@@ -390,7 +424,7 @@ function Scan(){
 				url:'/CartPost/'+kode,
 				method:'GET',
 				success:function(data){
-					LoadCart();
+					LoadCart2(kode);
 			 		$('#kodex').val('');
 			 		$('#kode2').val('');
 				}
@@ -402,7 +436,7 @@ function Scan(){
 				url:'/CartBeliPost/'+kode,
 				method:'GET',
 				success:function(data){
-					LoadCart();
+					LoadCart2(kode);
 			 		$('#kodex').val('');
 			 		$('#kode2').val('');
 				}
@@ -1227,7 +1261,7 @@ $(document).on('keypress',function(e) {
 				url:'/CartPost/'+kode,
 				method:'GET',
 				success:function(data){
-					LoadCart();
+					LoadCart2(kode);
 			 		$('#kodex').val('');
 			 		$('#kode2').val('');
 				}
@@ -1239,7 +1273,7 @@ $(document).on('keypress',function(e) {
 				url:'/CartBeliPost/'+kode,
 				method:'GET',
 				success:function(data){
-					LoadCart();
+					LoadCart2(kode);
 			 		$('#kodex').val('');
 			 		$('#kode2').val('');
 				}

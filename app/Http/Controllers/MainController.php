@@ -199,16 +199,41 @@ class MainController extends Controller
     	}else{
     		return Response()->JSON('kode salah');
     	}
-    	}
+    	}else{
+                $dataqty=$data3['qty']+1;
+                $datasubtotal=$dataqty*$data3['hargacart'];
+                Cart::where('kode',$kode)->update(['qty'=>$dataqty,'modaltotal'=>$data2['hargabeli']*$dataqty,'subtotal'=>$datasubtotal,'untung'=>$datasubtotal-$data2['hargabeli']*$dataqty]);
+            }
     }
 
  public function CartBeliPost($kode) {
- $data2=Stok::where('kode',$kode)->first(); $data3=CartBeli::where( array(
- 'kode'=>$kode, 'transaksi'=>'', ) )->first(); if ($data3=='') {  if
- ($data2!='') { $data=array( 'transaksi'=>'', 'kode'=>$kode, 'qty'=>1,
- 'hargacartbeli'=>$data2['hargabeli'], 'disc1'=>0, 'disc2'=>0,
- 'discnominal'=>0, 'subtotal'=>$data2['hargabeli'], );
- CartBeli::create($data); }else{ return Response()->JSON('kode salah'); } } }
+ $data2=Stok::where('kode',$kode)->first(); 
+ $data3=CartBeli::where( array(
+ 'kode'=>$kode, 
+ 'transaksi'=>'',
+    ) )->first();
+ if ($data3=='') {  
+    if($data2!='') { 
+    $data=array( 
+        'transaksi'=>'', 
+        'kode'=>$kode, 
+        'qty'=>1,
+        'hargacartbeli'=>$data2['hargabeli'], 
+        'disc1'=>0, 
+        'disc2'=>0,
+        'discnominal'=>0, 
+        'subtotal'=>$data2['hargabeli'], 
+    );
+ CartBeli::create($data); 
+}else{ 
+    return Response()->JSON('kode salah'); 
+} 
+}else{
+    $dataqty=$data3['qty']+1;
+    $datasubtotal=$dataqty*$data3['hargacartbeli'];
+    CartBeli::where('kode',$kode)->update(['qty'=>$dataqty,'subtotal'=>$datasubtotal]);
+} 
+}
 
     public function PenjualanPost(Request $request)
     {  
@@ -756,7 +781,7 @@ class MainController extends Controller
     {
         $data=Stok::where('kode',$id)->first()['hargabeli'];
         $data3=Stok::where('kode',$id)->first()['hargajual'];
-        $data2=($subtotal-$data);
+        $data2=($subtotal-($data*$qty));
         Cart::where(array(
             'kode'=>$id,
             'transaksi'=>''
