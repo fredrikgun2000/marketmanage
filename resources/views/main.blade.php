@@ -116,8 +116,8 @@ table{
   </div>
 </div>
 
-
-<!-- <div class="panel-group" style="position: fixed;bottom: 0px;">
+<!-- 
+<div class="panel-group" style="position: fixed;bottom: 0px;">
             <div class="panel panel-default">
                 
                 <div id="collapse1" class="panel-collapse collapse px-2 py-2 bgcolor2" style="border-radius: 10px 10px 0px 0px; border: 1px solid black;">
