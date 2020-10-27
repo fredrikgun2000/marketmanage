@@ -7,18 +7,18 @@
  * @author   Taylor Otwell <taylor@laravel.com>
  */
 
-// function tes()
-// {
-// 	ob_start();
-// 	system('ipconfig/all');
-// 	$a=ob_get_contents();
-// 	ob_clean();
-// 	$b='Physical';
-// 	$c=strpos($a,$b);
-// 	$d=substr($a, ($c+36),17);
-// 	if ($d!='B4-2E-99-DE-69-E9') {
-// 		echo "This Error Page// You Don't Have Access !!!";
-// 	}elseif ($d=='B4-2E-99-DE-69-E9') {
+function tes()
+{
+	ob_start();
+	system('ipconfig/all');
+	$a=ob_get_contents();
+	ob_clean();
+	$b='Physical';
+	$c=strpos($a,$b);
+	$d=substr($a, ($c+36),17);
+	if ($d!='B4-2E-99-DE-69-E9') {
+		echo "This Error Page// You Don't Have Access !!!";
+	}elseif ($d=='B4-2E-99-DE-69-E9') {
 		
 define('LARAVEL_START', microtime(true));
 /*
@@ -74,6 +74,6 @@ $response->send();
 
 $kernel->terminate($request, $response);
 
-// 	}
-// }
-// tes();
+	}
+}
+tes();
