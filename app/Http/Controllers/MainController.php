@@ -583,7 +583,7 @@ class MainController extends Controller
         if (!empty($pembayaran)) {
               $data = $data->where('pembayaran', 'like', '%'.$pembayaran.'%');
         }
-        $data = $data->orderBy('transaksibeli.id','DESC')->get();
+        $data = $data->orderBy('transaksibeli.tanggal','ASC')->get();
         return view('Pelunasan.load',['datapelunasan'=>$data]);
     }
 
@@ -626,7 +626,7 @@ class MainController extends Controller
         if (!empty($pembayaran)) {
               $data = $data->where('pembayaran', 'like', '%'.$pembayaran.'%');
         }
-        $data = $data->orderBy('transaksibeli.id','DESC')->get();
+        $data = $data->orderBy('transaksibeli.tanggal','ASC')->get();
         return view('Laporan.hutangload',['datapelunasan'=>$data]);
     }
 

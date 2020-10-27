@@ -57,7 +57,7 @@
 							 					<select name="supplier" id="supplier">
 							 						<option></option>
 							 						@foreach($datasupplier as $d)
-							 						<option>{{$d->nama}}-{{$d->telepon}}</option>
+							 						<option>{{$d->nama}}</option>
 							 						@endforeach
 							 					</select>
 							 				</div>
