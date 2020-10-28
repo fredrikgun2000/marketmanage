@@ -942,7 +942,7 @@ function HutangLoad() {
 	 		}
 	 	})
  	}else if ($('#pagination').val()=='Pembelian') {
-			 		var qty=$('.qty'+id).val();
+			 		var qty=parseInt($('.qty'+id).val());
 			 		alert(qty);
 				 	$('.qty'+id).val(qty);
 				 	var hargacart=$('#hargacart'+id).val();
