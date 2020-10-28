@@ -789,7 +789,8 @@ function HutangLoad() {
 		var tanggal3=$( '#tanggal3' ).datepicker({dateFormat: 'yy-mm-dd'}).val(); 
 		var tanggal4=$('#tanggal4').datepicker({dateFormat: 'yy-mm-dd'}).val();
 		var transaksi=$('#transaksi').val();
-		var supplier=$('#supplier').val();
+		var supplier=$('#suppliers').val();
+		alert(supplier);
 		$.ajax({
 			url:'HutangLoad',
 			data:'transaksi='+transaksi+'&tanggal1='+tanggal1+'&tanggal2='+tanggal2+'&tanggal3='+tanggal3+'&tanggal4='+tanggal4+'&supplier='+supplier,

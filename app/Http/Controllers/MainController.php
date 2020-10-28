@@ -217,12 +217,12 @@ class MainController extends Controller
     $data=array( 
         'transaksi'=>'', 
         'kode'=>$kode, 
-        'qty'=>1,
+        'qty'=>0,
         'hargacartbeli'=>$data2['hargabeli'], 
         'disc1'=>0, 
         'disc2'=>0,
         'discnominal'=>0, 
-        'subtotal'=>$data2['hargabeli'], 
+        'subtotal'=>0, 
     );
  CartBeli::create($data); 
 }else{ 
@@ -583,7 +583,7 @@ class MainController extends Controller
         if (!empty($pembayaran)) {
               $data = $data->where('pembayaran', 'like', '%'.$pembayaran.'%');
         }
-        $data = $data->orderBy('transaksibeli.tanggal','ASC')->get();
+        $data = $data->orderBy('transaksibeli.tempo','ASC')->get();
         return view('Pelunasan.load',['datapelunasan'=>$data]);
     }
 
@@ -626,7 +626,7 @@ class MainController extends Controller
         if (!empty($pembayaran)) {
               $data = $data->where('pembayaran', 'like', '%'.$pembayaran.'%');
         }
-        $data = $data->orderBy('transaksibeli.tanggal','ASC')->get();
+        $data = $data->orderBy('transaksibeli.tempo','ASC')->get();
         return view('Laporan.hutangload',['datapelunasan'=>$data]);
     }
 

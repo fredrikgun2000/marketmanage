@@ -192,7 +192,7 @@
 							 					<label>supplier</label>
 							 				</div>
 							 				<div class="col-lg-6">
-							 					<select name="supplier" id="supplier">
+							 					<select name="supplier" id="suppliers">
 							 						<option></option>
 							 						@foreach($datasupplier as $d)
 							 						<option>{{$d->nama}}</option>
