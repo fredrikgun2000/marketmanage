@@ -943,6 +943,7 @@ function HutangLoad() {
 	 	})
  	}else if ($('#pagination').val()=='Pembelian') {
 			 		var qty=$('.qty'+id).val();
+			 		alert(qty);
 				 	$('.qty'+id).val(qty);
 				 	var hargacart=$('#hargacart'+id).val();
 				 	var disc1=$('.disc1k'+id).val();
