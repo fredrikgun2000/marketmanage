@@ -217,7 +217,7 @@ class MainController extends Controller
     $data=array( 
         'transaksi'=>'', 
         'kode'=>$kode, 
-        'qty'=>0,
+        'qty'=>'',
         'hargacartbeli'=>$data2['hargabeli'], 
         'disc1'=>0, 
         'disc2'=>0,
