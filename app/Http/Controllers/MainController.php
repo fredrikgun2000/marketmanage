@@ -202,7 +202,24 @@ class MainController extends Controller
     	}else{
                 $dataqty=$data3['qty']+1;
                 $datasubtotal=$dataqty*$data3['hargacart'];
-                Cart::where('kode',$kode)->update(['qty'=>$dataqty,'modaltotal'=>$data2['hargabeli']*$dataqty,'subtotal'=>$datasubtotal,'untung'=>$datasubtotal-$data2['hargabeli']*$dataqty]);
+                Cart::where(array(
+                'kode'=>$kode,
+                'transaksi'=>'',
+            ))->update(['qty'=>$dataqty,'modaltotal'=>$data2['hargabeli']*$dataqty,'subtotal'=>$datasubtotal,'untung'=>$datasubtotal-$data2['hargabeli']*$dataqty]);
+                $data4=Cart::where(
+            array(
+                'kode'=>$kode,
+                'transaksi'=>'',
+            )
+        )->first();
+                $dataqty=$data4['qty']-1;
+        if ($data4['qty']>$data2['stok']) {
+            Cart::where(array(
+                'kode'=>$kode,
+                'transaksi'=>'',
+            ))->update(['qty'=>$data2['stok'],'modaltotal'=>$data2['hargabeli']*$dataqty,'subtotal'=>$datasubtotal,'untung'=>$datasubtotal-$data2['hargabeli']*$dataqty]);
+            return Response()->JSON(['data1'=>$data2['stok'],'data2'=>$data4['qty'],]);
+        }
             }
     }
 

@@ -8,7 +8,6 @@ $(document).ready(function() {
 	LoadCart();
 	$('#kodex').focus();
 	setInterval(Scan,1000);
-	setInterval(ScanBeli,1000);
 	hitung2();
 	LaporanPembelianLoad();
 	$( '#tanggal1' ).datepicker({dateFormat: 'yy-mm-dd'}).val(); 
@@ -377,9 +376,13 @@ function Scan(){
 				url:'/CartPost/'+kode,
 				method:'GET',
 				success:function(data){
+					if (data.data1<data.data2) {
+						alert('stok hanya :'+data.data1)
+					}
 					LoadCart();
 			 		$('#kodex').val('');
 			 		$('#kode2').val('');
+
 				}
 			})
  		}
@@ -398,25 +401,7 @@ function Scan(){
  	}
  }
 
- function ScanBeli(){
- 	var kode=$('#kodex').val();
- 	var pagination=$('#pagination').val();
- 	if (pagination=='Scanning') {
-	 	if (kode!='') {
-			$.ajax({
-				url:'/CartBeliPost/'+kode,
-				method:'GET',
-				success:function(data){
-					LoadCart();
-			 		$('#kodex').val('');
-			 		$('#kode2').val('');
-				}
-			})
- 		}
- 	}
- }
-
- $(document).on('click','#CartManualPost',function(){
+$(document).on('click','#CartManualPost',function(){
  	var kode=$('#kode2').val();
  	var pagination=$('#pagination').val();
  	if (pagination=='Scanning') {
