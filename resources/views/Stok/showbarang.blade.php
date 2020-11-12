@@ -1,6 +1,6 @@
 <div id="subbarang">
-<div class="remove">
-	<div class="container-fluid">
+<div class="">
+	<div class="container-fluid remove">
 			<div class="row">
 				<div class="col-lg-12">
 					<a  data-toggle="collapse" href="#JenisForm" role="button" aria-expanded="false" aria-controls="collapseExample">
@@ -37,7 +37,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="container-fluid">
+		<div class="container-fluid remove">
 			<div class="row">
 				<div class="col-lg-12">
 					<a  data-toggle="collapse" href="#DiskonFormCollapse" role="button" aria-expanded="false" aria-controls="collapseExample" id="collapsediskon">
@@ -74,7 +74,7 @@
 		      </div>
 			<div class="row bgcolor2 my-2">
 				<div class="col-lg-12">
-						<form method="POST" id="StokForm" class=" my-3">
+						<form method="POST" id="StokForm" class=" my-3 remove">
 						@csrf
 						<div class="row my-1">
 							<div class="col-lg-6">

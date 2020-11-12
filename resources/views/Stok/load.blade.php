@@ -38,7 +38,7 @@
 	<input type="hidden" name="" value="{{$d}}" class="totalhargabeli">
 @endforeach
 <div class="row">
-	<dir class="col-lg-12 text-right">Total Modal: Rp <b id="totalmodalstok"></b></dir>
+	<dir class="col-lg-12 text-right remove">Total Modal: Rp <b id="totalmodalstok"></b></dir>
 </div>
 
 
