@@ -1,7 +1,9 @@
+@extends('layout')
+@section('main')
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+  <title>Manage Market</title>
 </head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -171,3 +173,4 @@ function closeNav() {
 </script>
 </body>
 </html>
+@endsection

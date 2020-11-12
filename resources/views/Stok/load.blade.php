@@ -1,10 +1,12 @@
-<table border="1" width="100%;" style="text-align: center;">
+<div style="max-height: 350px; overflow-y: auto;">
+	<table border="1" width="100%;" style="text-align: center;">
 	<tr class="bg-dark text-light">
 		<td>#</td>
 		<td>Kode</td>
 		<td>Nama</td>
 		<td class="hb">H Beli</td>
 		<td>H Jual</td>
+		<td>Diskon</td>
 		<td>Satuan</td>
 		<td>Jenis</td>
 		<td>Stok</td>
@@ -20,6 +22,7 @@
 		<td>{{$d->nama}}</td>
 		<td class="hb rupiah">{{$d->hargabeli}}</td>
 		<td class="rupiah">{{$d->hargajual}}</td>
+		<td class="rupiah">{{$d->diskon}}</td>
 		<td>{{$d->satuan}}</td>
 		<td>{{$d->jenis}}</td>
 		<td>{{$d->stok}}</td>
@@ -30,6 +33,13 @@
 	</tr>
 	@endforeach
 </table>
+</div>
+@foreach($totalstok as $d)
+	<input type="hidden" name="" value="{{$d}}" class="totalhargabeli">
+@endforeach
+<div class="row">
+	<dir class="col-lg-12 text-right">Total Modal: Rp <b id="totalmodalstok"></b></dir>
+</div>
 
 
 	<div class="modal fade" id="ModalStok" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

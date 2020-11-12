@@ -36,11 +36,45 @@
 					</form>
 				</div>
 			</div>
+		</div>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-lg-12">
+					<a  data-toggle="collapse" href="#DiskonFormCollapse" role="button" aria-expanded="false" aria-controls="collapseExample" id="collapsediskon">
+				    Tambah Diskon
+				  </a>
+				</div>
+			</div>
+		</div>
+		<div id="DiskonFormCollapse" class="collapse">
+			<div class="row my-2">
+				<div class="col-lg-4">
+					<input type="text" class="kosong form-control search2"  name="" placeholder="Cari..">
+				</div>
+				<div class="col-lg-8 text-right">
+					<button id="cekdiskonmanual" class="btn btn-success">CeK Diskon</button>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12" id="DiskonLoad"></div>
+			</div>
+		</div>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-lg-12">
+					<a  data-toggle="collapse" href="#StokFormCollapse" role="button" aria-expanded="false" aria-controls="collapseExample">
+				    Tambah Stok
+				  </a>
+				</div>
+			</div>
+		</div>
+		<div id="StokFormCollapse" class="collapse">
+		<div class="container-fluid">
 			    <div class="alert alert-danger" id="stokalert" style="display: none;">
 		      </div>
-			<div class="row bgcolor2 my-2 py-2">
+			<div class="row bgcolor2 my-2">
 				<div class="col-lg-12">
-						<form method="POST" id="StokForm">
+						<form method="POST" id="StokForm" class=" my-3">
 						@csrf
 						<div class="row my-1">
 							<div class="col-lg-6">
@@ -101,7 +135,9 @@
 				</div>
 			</div>
 	</div>
+	</div>
 		</div>
+		<div id="StokFormCollapse" class="collapse">
 			<div class="row my-2">
 				<div class="col-lg-4">
 					<input type="text" class="kosong form-control search"  name="" placeholder="Cari..">
@@ -110,4 +146,7 @@
 			<div class="row">
 				<div class="col-lg-12" id="StokLoad"></div>
 			</div>
+		</div>
+		
+
 </div>

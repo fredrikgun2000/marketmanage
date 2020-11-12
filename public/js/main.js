@@ -1,5 +1,6 @@
 //dinamis
 $(document).ready(function() {
+	CekDiskon();
 	CekPosisi();
 	LoadPagination();
 	LoadKaryawan();
@@ -16,8 +17,11 @@ $(document).ready(function() {
 	$('#tanggal2un').datepicker({dateFormat: 'yy-mm-dd'}).val();
 	$( '#tanggal1s' ).datepicker({dateFormat: 'yy-mm-dd'}).val(); 
 	$('#tanggal2s').datepicker({dateFormat: 'yy-mm-dd'}).val();
-	$( '#tanggal3' ).datepicker({dateFormat: 'yy-mm-dd'}).val(); 
+	$('#tanggal3' ).datepicker({dateFormat: 'yy-mm-dd'}).val(); 
 	$('#tanggal4').datepicker({dateFormat: 'yy-mm-dd'}).val();
+	$('#tanggalmulai').datepicker({dateFormat: 'yy-mm-dd'}).val();
+	$('#tanggalakhir').datepicker({dateFormat: 'yy-mm-dd'}).val();
+	$('#tanggalxx').datepicker({dateFormat: 'yy-mm-dd'}).val();
 	$('#jam').wickedpicker({ twentyFour:true}).val();
 	$('input').attr('autocomplete','off');
 	$('#subpembelian').css({"border":"1px solid #28a785","padding":"2px"});
@@ -45,6 +49,7 @@ $(document).on('submit','#StokForm',function(e){
 		processData: false,
 		success:function(data){
 			LoadStock();
+			LoadDiskon();
 			$('.kosong').val('');
 			$('#stokalert').html(data.err).show();
 			if (data.err==null) {
@@ -220,10 +225,29 @@ function LoadStock() {
 			aDec:',',
 			aSep:'.'
 				});
+				totalmodalstok();
 				CekPosisi();
 			}
 		})
 	}
+}
+
+
+function LoadDiskon() {
+		$.ajax({
+			url:'/DiskonLoad',
+			method:'GET',
+			success:function(data){
+				$('#DiskonLoad').html(data);
+				$('.rupiah').autoNumeric('init',{
+
+			aDec:',',
+			aSep:'.'
+				});
+				CekPosisi();
+			}
+		})
+	
 }
 
 function LoadCart() {
@@ -526,6 +550,15 @@ function untunglap() {
 	$('#totaluntungx').html(uang(s));
 }
 
+function totalmodalstok() {
+	var s=0;
+	$('.totalhargabeli').each(function(){
+		var a=$(this).val();
+		s +=parseInt(a);
+	});
+	$('#totalmodalstok').html(uang(s));
+}
+
 function subtotal1() {
 	var s=0;
 	$('.subtotal1').each(function(){
@@ -667,6 +700,26 @@ function EditBarang() {
 	}
 }
 
+function EditDiskon() {
+		var id=$('#iddiskon').val();
+		var kodebarang=$('#kodebarangx').val();
+		var tanggalmulai=$('#tanggalmulai').datepicker({dateFormat: 'yy-mm-dd'}).val();
+		var tanggalakhir=$('#tanggalakhir').datepicker({dateFormat: 'yy-mm-dd'}).val();
+		var minitem=$('#minitem').val();
+		var diskonpersen=$('#diskonpersen').val();
+		var diskonnominal=$('#diskonnominalx').val();
+		$.ajax({
+			url:'/DiskonUpdate',
+			data:'id='+id+'&kodebarang='+kodebarang+'&tanggalmulai='+tanggalmulai+'&tanggalakhir='+tanggalakhir+'&minitem='+minitem+'&diskonpersen='+diskonpersen+'&diskonnominal='+diskonnominal,
+			method:'GET',
+			success:function(data){
+				LoadDiskon();
+				LoadStock();
+				DeleteId();
+			}
+		})
+}
+
 function EditSupplier() {
 	if ($('#pagination').val()=='Stok') {
 		var id=$('#id').val();
@@ -792,7 +845,43 @@ function HutangLoad() {
 		})
 	}
 }
+
+function CekDiskon() {
+	var get=sessionStorage.getItem('session_diskon');
+	if (get!='tercek') {
+		$.ajax({
+			url:'http://localhost:8000/CekDiskon',
+			method:'GET',
+			success:function(data){
+				sessionStorage.setItem('session_diskon','tercek');
+				LoadDiskon();
+			}
+		})
+	}else{
+		console.log('tercek');
+	}
+}
  //eksekusi 2
+$(document).on('click','#collapsediskon',function(){
+	$('#tanggalmulai').datepicker({dateFormat: 'yy-mm-dd'}).val();
+	$('#tanggalakhir').datepicker({dateFormat: 'yy-mm-dd'}).val();
+	LoadDiskon();
+})
+
+
+$(document).on('click','#cekdiskonmanual',function(){
+	$.ajax({
+			url:'http://localhost:8000/CekDiskon',
+			method:'GET',
+			success:function(data){
+				sessionStorage.setItem('session_diskon','tercek');
+				LoadDiskon();
+				LoadStock();
+			}
+		})
+})
+
+
  $(document).on('click','.SupplierEdit',function(){
  	var id=$(this).attr('id');
  	$.ajax({
@@ -959,8 +1048,8 @@ function HutangLoad() {
  	var disc2=parseInt($('.disc2k'+id).val());
  	var discnominal=parseInt($('.discnominal'+id).val());
  	hitung(id,qty,hargacart,disc1,disc2,discnominal);
- 	var subtotal=parseInt($('#subtotal'+id).val());
 	CartUpdate(id,qty,disc1,disc2,discnominal,subtotal);
+ 	var subtotal=parseInt($('#subtotal'+id).val());
 	
  })
 
@@ -1161,6 +1250,21 @@ $(document).on('click','#editbarang',function(){
 	EditBarang();
  })
 
+$(document).on('click','.editdiskons',function(){
+	var id=$(this).attr('id');
+	var kodebarang=$('#kodebarangs'+id).val();
+	$('#iddiskon').val(id);
+	$('#kodebarang').html(kodebarang);
+	$('#kodebarangx').val(kodebarang);
+	$('#tanggalmulai').datepicker({dateFormat: 'yy-mm-dd'}).val();
+	$('#tanggalakhir').datepicker({dateFormat: 'yy-mm-dd'}).val();
+
+})
+
+$(document).on('click','#editdiskon',function(){
+	EditDiskon();
+ })
+
 
 $(document).on('click','#editsupplier',function(){
 	EditSupplier();
@@ -1185,6 +1289,19 @@ $(document).on('keyup','.search',function(){
 			}else if (sub=='substaffbaru') {
 				$('#KaryawanLoad').html(data);
 			}
+			CekPosisi();
+		}
+	})
+})
+
+$(document).on('keyup','.search2',function(){
+	var search=$(this).val();
+	$.ajax({
+		url:'/Search',
+		data:'search='+search+'&sub=subdiskon',
+		method:'GET',
+		success:function(data){
+			$('#DiskonLoad').html(data);
 			CekPosisi();
 		}
 	})
@@ -1352,6 +1469,7 @@ function grand3(){
 // });
 
 $(document).on('keypress',function(e) {
+
     	var kode=$('#kode2').val();
 		var pagination=$('#pagination').val();
     if (e.keyCode==47) {
@@ -1381,4 +1499,25 @@ $(document).on('keypress',function(e) {
 		}
 		}
 	}
+});
+
+
+$(document).on('keypress',function(e) {
+    if (e.keyCode==42) {
+    	$('#kodex').focus();
+	}
+});
+
+
+$(document).on('keypress',function(e) {
+    if (e.keyCode==45) {
+    	$('input').blur();
+    	LoadCart();
+	}
+});
+
+
+$(document).on('click','#butload',function(e) {
+    	$('input').blur();
+    	LoadCart();
 });

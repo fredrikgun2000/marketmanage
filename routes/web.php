@@ -73,3 +73,6 @@ Route::get('/CollapseLaporanBeli/{id}','MainController@CollapseLaporanBeli');
 Route::get('/CollapseLaporanj/{id}','MainController@CollapseLaporanJual');
 Route::get('/detilpelunasanbayar/{id}','MainController@detilpelunasanbayar');
 Route::get('/Search','MainController@Search');
+Route::get('/CekDiskon','MainController@CekDiskon');
+Route::get('/DiskonLoad','MainController@DiskonLoad');
+Route::get('/DiskonUpdate','MainController@DiskonUpdate');

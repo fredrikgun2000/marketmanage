@@ -96,7 +96,9 @@
 					<div class="col-lg-5 text-success" id="kembalian">0</div>
 				</div>
 				<div class="row my-2">
-					<div class="col-lg-7"><button type="submit" class="btn text-light bgcolor1">Post Transaksi</button></div>
+					<div class="col-lg-7">
+						<button type="button" id="butload" class="btn btn-success">Cek</button>
+						<button type="submit" class="btn text-light bgcolor1">Post Transaksi</button></div>
 				</div>
 			</div>
 		</div>

@@ -1,3 +1,5 @@
+@extends('layout')
+@section('login')
 <!DOCTYPE html>
 <html>
 <head>
@@ -67,3 +69,4 @@
 
 </body>
 </html>
+@endsection

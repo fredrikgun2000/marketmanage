@@ -20,6 +20,7 @@ use App\TransaksiJual;
 use App\TransaksiBeli;
 use App\Pelunasan;
 use App\Absen;
+use App\Diskon;
 
 //get
 class MainController extends Controller
@@ -149,7 +150,8 @@ class MainController extends Controller
                 'stok'=>0,
                 'satuan'=>$satuan,
             );
-        	Stok::create($data);
+            Stok::create($data);
+        	Diskon::create(['kodebarang'=>$kode,'tanggalmulai'=>'0000-00-00','tanggalakhir'=>'0000-00-00','minitem'=>0,'diskon'=>0]);
             return Response()->JSON(['msg'=>'data berhasil di input']);
         }else{
         	return Response()->JSON(['err'=>'Kode Sudah Ada']);
@@ -199,8 +201,34 @@ class MainController extends Controller
     	}else{
     		return Response()->JSON('kode salah');
     	}
-    	}else{
-                $dataqty=$data3['qty']+1;
+    	 
+     //        $data4=Diskon::where('kodebarang',$kode)->first();
+     //        $dataqty=$data3['qty']+1;
+     //            if ($dataqty%$data4['minitem']==0) {
+     //                $data5=($data3['qty']+1)/$data4['minitem'];
+     //            $datasubtotal=$dataqty*$data3['hargacart'];
+
+     //            Cart::where(array(
+     //            'kode'=>$kode,
+     //            'transaksi'=>'',
+     //        ))->update(['qty'=>$dataqty,'modaltotal'=>$data2['hargabeli']*$dataqty,'subtotal'=>$datasubtotal-($data5*$data4['diskon']),'untung'=>$datasubtotal-($data2['hargabeli']*$dataqty)-($data5*$data4['diskon'])]);
+     //            $data4=Cart::where(
+     //        array(
+     //            'kode'=>$kode,
+     //            'transaksi'=>'',
+     //        )
+     //    )->first();
+     //            $dataqty=$data4['qty']-1;
+     //    if ($data4['qty']>$data2['stok']) {
+     //        Cart::where(array(
+     //            'kode'=>$kode,
+     //            'transaksi'=>'',
+     //        ))->update(['qty'=>$data2['stok'],'modaltotal'=>$data2['hargabeli']*$dataqty,'subtotal'=>$datasubtotal,'untung'=>$datasubtotal-$data2['hargabeli']*$dataqty]);
+     //        return Response()->JSON(['data1'=>$data2['stok'],'data2'=>$data4['qty']]);
+     //    }
+     //    return 'terupdated';
+                }else{
+                    $dataqty=$data3['qty']+1;
                 $datasubtotal=$dataqty*$data3['hargacart'];
                 Cart::where(array(
                 'kode'=>$kode,
@@ -218,10 +246,12 @@ class MainController extends Controller
                 'kode'=>$kode,
                 'transaksi'=>'',
             ))->update(['qty'=>$data2['stok'],'modaltotal'=>$data2['hargabeli']*$dataqty,'subtotal'=>$datasubtotal,'untung'=>$datasubtotal-$data2['hargabeli']*$dataqty]);
-            return Response()->JSON(['data1'=>$data2['stok'],'data2'=>$data4['qty'],]);
+            return Response()->JSON(['data1'=>$data2['stok'],'data2'=>$data4['qty']]);
         }
+        return 'updated';
+                }
             }
-    }
+    
 
  public function CartBeliPost($kode) {
  $data2=Stok::where('kode',$kode)->first(); 
@@ -437,8 +467,38 @@ class MainController extends Controller
 
     public function StokLoad()
     {
-        $data=Stok::orderBy('id','DESC')->get();
-    	return view('Stok.load',['StokLoad'=>$data]);
+        $data=DB::table('diskon')
+        ->select('*')
+        ->join('stok','stok.kode','=','diskon.kodebarang')
+        ->orderBy('stok.id','DESC')->get();
+        $data2=Stok::get('id');
+        $datahitung=[];
+        foreach ($data2 as $key) {
+            $data1=Stok::where('id',$key['id'])->first();
+            $datahitung[]=$data1['stok']*$data1['hargabeli'];
+        }
+
+        return view('Stok.load',['StokLoad'=>$data,'totalstok'=>$datahitung]);
+    }
+
+    public function DiskonLoad()
+    {
+        $data=Diskon::orderBy('diskon.id','DESC')->get();
+        return view('Diskon.load',['DiskonLoad'=>$data]);
+    }
+
+    public function CekDiskon()
+    {
+        $hariini= date("Y-m-d");
+        $data=diskon::orwhere('tanggalmulai','>',$hariini)->orwhere('tanggalakhir','<',$hariini)->orwhere('tanggalmulai','=','0000-00-00')->orWhere('tanggalakhir','=','0000-00-00')->get('id');
+            foreach ($data as $key) {
+          $datas = array(                 
+              'id'=>$key['id'],                  
+          );         
+          Diskon::where($datas)
+          ->update(['minitem'=>'0','diskon'=>'0']);
+        }
+        
     }
 
     public function SupplierLoad()
@@ -787,9 +847,36 @@ class MainController extends Controller
         return Response()->JSON($id);
 
     }
+     public function DiskonUpdate(Request $request)
+    {
+        $id=$request['id'];
+        $kodebarang=$request['kodebarang'];
+        $tanggalmulai=$request['tanggalmulai'];
+        $tanggalakhir=$request['tanggalakhir'];
+        $minitem=$request['minitem'];
+        $diskonpersen=$request['diskonpersen'];
+        $diskonnominal=$request['diskonnominal'];
+
+        $cek=Stok::where('kode',$kodebarang)->first();
+        $diskon=($cek['hargajual']*$diskonpersen/100)+$diskonnominal;
+
+        $data=array(
+            'tanggalmulai'=>$tanggalmulai,
+            'tanggalakhir'=>$tanggalakhir,
+            'minitem'=>$minitem,
+            'diskon'=>$diskon,
+        );
+        Diskon::where('id',$id)->update($data);
+        return Response()->JSON($id);
+
+    }
+
+
 
     public function DeleteStok($id)
     {
+        $data=Stok::where('id',$id)->first()['kode'];
+        Diskon::where('kodebarang',$data)->delete();
         Stok::where('id',$id)->delete();
         return back();
     }
@@ -798,8 +885,30 @@ class MainController extends Controller
     {
         $data=Stok::where('kode',$id)->first()['hargabeli'];
         $data3=Stok::where('kode',$id)->first()['hargajual'];
+        $data5=Stok::where('kode',$id)->first();
         $data2=($subtotal-($data*$qty));
-        Cart::where(array(
+        $data4=Diskon::where('kodebarang',$id)->first();
+        if ($qty%$data4['minitem']==0) {
+            $kalidiskon=$qty/$data4['minitem'];
+            $r1=$subtotal-($kalidiskon*$data4['diskon']);
+            Cart::where(array(
+                'kode'=>$id,
+                'transaksi'=>''
+            ))->update(
+                array(
+                    'qty'=>$qty,
+                    'disc1'=>$disc1,
+                    'disc2'=>$disc2,
+                    'discnominal'=>$discnominal,
+                    'modaltotal'=>$data*$qty,
+                    'subtotal'=>$r1,
+                    'untung'=>$data2-($kalidiskon*$data4['diskon']),
+                )
+            );
+
+            return Response()->JSON('berhasil update');
+        }else{
+            Cart::where(array(
             'kode'=>$id,
             'transaksi'=>''
         ))->update(
@@ -815,6 +924,8 @@ class MainController extends Controller
         );
 
         return Response()->JSON('berhasil update');
+        }
+        
     }
 
     public function CartBeliUpdate($id,$qty,$disc1,$disc2,$discnominal,$subtotal)
@@ -919,14 +1030,17 @@ class MainController extends Controller
         $sub=$request['sub'];
         $search=$request['search'];
         if ($sub=='subbarang') {
-            $data=Stok::where('nama','like', '%'.$search.'%')->orWhere('kode','like', '%'.$search.'%')->orWhere('jenis','like', '%'.$search.'%')->orWhere('satuan','like', '%'.$search.'%')->get();
+            $data=Stok::where('nama','like', '%'.$search.'%')->orWhere('kode','like', '%'.$search.'%')->orWhere('jenis','like', '%'.$search.'%')->orWhere('satuan','like', '%'.$search.'%')->orderBy('id','DESC')->get();
             return view('Stok.load',['StokLoad'=>$data]);
         }elseif ($sub=='subsupplier') {
-            $data=Supplier::where('nama','like', '%'.$search.'%')->get();
+            $data=Supplier::where('nama','like', '%'.$search.'%')->orderBy('id','DESC')->get();
             return view('Stok.supplierload',['SupplierLoad'=>$data]);
         }elseif ($sub=='substaffbaru') {
-            $data=User::where('namapengguna','like', '%'.$search.'%')->get();
+            $data=User::where('namapengguna','like', '%'.$search.'%')->orderBy('id','DESC')->get();
             return view('Karyawan.load',['KaryawanLoad'=>$data]);
+        }elseif ($sub=='subdiskon') {
+            $data=Diskon::where('kodebarang','like', '%'.$search.'%')->orderBy('id','DESC')->get();
+            return view('Diskon.load',['DiskonLoad'=>$data]);
         }
     }
 
