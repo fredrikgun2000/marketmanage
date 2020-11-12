@@ -496,7 +496,7 @@ class MainController extends Controller
               'id'=>$key['id'],                  
           );         
           Diskon::where($datas)
-          ->update(['minitem'=>'0','diskon'=>'0']);
+          ->update(['tanggalmulai'=>'0000-00-00','tanggalakhir'=>'0000-00-00','minitem'=>'0','diskon'=>'0']);
         }
         
     }
