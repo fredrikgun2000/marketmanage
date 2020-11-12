@@ -35,10 +35,10 @@
 </table>
 </div>
 @foreach($totalstok as $d)
-	<input type="hidden" name="" value="{{$d}}" class="totalhargabeli">
+	<input type="hidden" name="" value="{{$d}}" class="totalhargabeli ">
 @endforeach
 <div class="row">
-	<dir class="col-lg-12 text-right remove">Total Modal: Rp <b id="totalmodalstok"></b></dir>
+	<div class="col-lg-12 text-right remove">Total Modal: Rp <b id="totalmodalstok"></b></div>
 </div>
 
 

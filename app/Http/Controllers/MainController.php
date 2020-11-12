@@ -1031,7 +1031,7 @@ class MainController extends Controller
         $search=$request['search'];
         if ($sub=='subbarang') {
             $data=Stok::where('nama','like', '%'.$search.'%')->orWhere('kode','like', '%'.$search.'%')->orWhere('jenis','like', '%'.$search.'%')->orWhere('satuan','like', '%'.$search.'%')->orderBy('id','DESC')->get();
-            return view('Stok.load',['StokLoad'=>$data]);
+            return view('Stok.load',['StokLoad'=>$data,'totalstok'=>[0,0]]);
         }elseif ($sub=='subsupplier') {
             $data=Supplier::where('nama','like', '%'.$search.'%')->orderBy('id','DESC')->get();
             return view('Stok.supplierload',['SupplierLoad'=>$data]);
