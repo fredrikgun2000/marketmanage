@@ -25,7 +25,7 @@
 						</div>
 						<div class="row">
 							<div class="col-lg-12">
-								<input type="text" name="jenis" id="jenis" class="kosong form-control">
+								<input autocomplete="off" type="text" name="jenis" id="jenis" class="kosong form-control">
 							</div>
 						</div>
 						<div class="row">
@@ -49,7 +49,7 @@
 		<div id="DiskonFormCollapse" class="collapse">
 			<div class="row my-2">
 				<div class="col-lg-4">
-					<input type="text" class="kosong form-control search2"  name="" placeholder="Cari..">
+					<input autocomplete="off" type="text" class="kosong form-control search2"  name="" placeholder="Cari..">
 				</div>
 				<div class="col-lg-8 text-right">
 					<button id="cekdiskonmanual" class="btn btn-success">CeK Diskon</button>
@@ -80,13 +80,13 @@
 							<div class="col-lg-6">
 								<div class="row">
 									<div class="col-lg-4">Kode Barang</div>
-									<div class="col-lg-8"><input type="text" name="kode" class="kosong form-control"></div>
+									<div class="col-lg-8"><input autocomplete="off" type="text" name="kode" class="kosong form-control"></div>
 								</div>
 							</div>
 							<div class="col-lg-6">
 								<div class="row">
 									<div class="col-lg-4">Nama Barang</div>
-									<div class="col-lg-8"><input type="text" name="nama" class="kosong form-control"></div>
+									<div class="col-lg-8"><input autocomplete="off" type="text" name="nama" class="kosong form-control"></div>
 								</div>
 							</div>
 						</div>
@@ -94,13 +94,13 @@
 							<div class="col-lg-6">
 								<div class="row">
 									<div class="col-lg-4">Harga Beli</div>
-									<div class="col-lg-8"><input type="text" name="hargabeli" class="kosong form-control" ></div>
+									<div class="col-lg-8"><input autocomplete="off" type="text" name="hargabeli" class="kosong form-control" ></div>
 								</div>
 							</div>
 							<div class="col-lg-6">
 								<div class="row">
 									<div class="col-lg-4">Harga Jual</div>
-									<div class="col-lg-8"><input type="text" name="hargajual" class="kosong form-control"></div>
+									<div class="col-lg-8"><input autocomplete="off" type="text" name="hargajual" class="kosong form-control"></div>
 								</div>
 							</div>
 						</div>
@@ -121,7 +121,7 @@
 							<div class="col-lg-6">
 								<div class="row">
 									<div class="col-lg-4">Satuan</div>
-									<div class="col-lg-8"><input type="text" name="satuan" class="kosong form-control"></div>
+									<div class="col-lg-8"><input autocomplete="off" type="text" name="satuan" class="kosong form-control"></div>
 								</div>
 							</div>
 						</div>
@@ -140,7 +140,7 @@
 		<div id="StokFormCollapse" class="collapse">
 			<div class="row my-2">
 				<div class="col-lg-4">
-					<input type="text" class="kosong form-control search"  name="" placeholder="Cari..">
+					<input autocomplete="off" type="text" class="kosong form-control search"  name="" placeholder="Cari..">
 				</div>
 			</div>
 			<div class="row">

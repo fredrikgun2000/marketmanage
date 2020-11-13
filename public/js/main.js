@@ -1510,10 +1510,11 @@ $(document).on('keypress',function(e) {
 
 
 $(document).on('keypress',function(e) {
-    if (e.keyCode==45) {
-    	$('input').blur();
-    	LoadCart();
-	}
+	alert(e.keyCode);
+ //    if (e.keyCode==45) {
+ //    	$('input').blur();
+ //    	LoadCart();
+	// }
 });
 
 
