@@ -608,6 +608,7 @@ function DeleteId() {
 }
 
 function CartUpdate(id,qty,disc1,disc2,discnominal,subtotal) {
+		alert(qty);
 	if ($('#pagination').val()=='Scanning') {
 			$.ajax({
 			url:'/CartUpdate/'+id+'/'+qty+'/'+disc1+'/'+disc2+'/'+discnominal+'/'+subtotal,

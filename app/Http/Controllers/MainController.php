@@ -888,26 +888,26 @@ class MainController extends Controller
         $data5=Stok::where('kode',$id)->first();
         $data2=($subtotal-($data*$qty));
         $data4=Diskon::where('kodebarang',$id)->first();
-        if ($qty%$data4['minitem']==0) {
-            $kalidiskon=$qty/$data4['minitem'];
-            $r1=$subtotal-($kalidiskon*$data4['diskon']);
-            Cart::where(array(
-                'kode'=>$id,
-                'transaksi'=>''
-            ))->update(
-                array(
-                    'qty'=>$qty,
-                    'disc1'=>$disc1,
-                    'disc2'=>$disc2,
-                    'discnominal'=>$discnominal,
-                    'modaltotal'=>$data*$qty,
-                    'subtotal'=>$r1,
-                    'untung'=>$data2-($kalidiskon*$data4['diskon']),
-                )
-            );
+        // if ($qty%$data4['minitem']==0) {
+            // $kalidiskon=$qty/$data4['minitem'];
+            // $r1=$subtotal-($kalidiskon*$data4['diskon']);
+            // Cart::where(array(
+            //     'kode'=>$id,
+            //     'transaksi'=>''
+            // ))->update(
+            //     array(
+            //         'qty'=>$qty,
+            //         'disc1'=>$disc1,
+            //         'disc2'=>$disc2,
+            //         'discnominal'=>$discnominal,
+            //         'modaltotal'=>$data*$qty,
+            //         'subtotal'=>$r1,
+            //         'untung'=>$data2-($kalidiskon*$data4['diskon']),
+            //     )
+            // );
 
-            return Response()->JSON('berhasil update');
-        }else{
+            // return Response()->JSON('berhasil update');
+        // }else{
             Cart::where(array(
             'kode'=>$id,
             'transaksi'=>''
@@ -924,7 +924,7 @@ class MainController extends Controller
         );
 
         return Response()->JSON('berhasil update');
-        }
+        // }
         
     }
 
