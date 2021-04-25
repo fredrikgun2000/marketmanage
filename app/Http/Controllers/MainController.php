@@ -1058,7 +1058,7 @@ class MainController extends Controller
     public function Print($tanggalpost,$subtotalt,$disc1t,$discnominalt)
     {
         // Set params
-        $store_name='Dunia Kita';
+        $store_name='Sinar Busana';
         $store_address='Jln transkalimantan ruko mitra keluarga';
         $store_phone='x';
         $tax_percentage = $subtotalt*($disc1t/100)+$discnominalt;
